@@ -2,37 +2,43 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main()
-{
-    // Initialize random number generator
+int main() {
+    int userChoice, computerChoice;
+
+    printf("Rock Paper Scissors Game!\n");
+    printf("1. Rock\n2. Paper\n3. Scissors\n");
+    printf("Enter your choice (1-3): ");
+    scanf("%d", &userChoice);
+
+    // Generate computer choice
     srand(time(0));
+    computerChoice = (rand() % 3) + 1;
 
-    // Generate random number between 1 and 100
-    int randomNumber = (rand() % 100) + 1;
-    int no_of_guesses = 0;
-    int guessed_number;
+    // Show choices
+    printf("You chose: ");
+    if (userChoice == 1) printf("Rock\n");
+    else if (userChoice == 2) printf("Paper\n");
+    else if (userChoice == 3) printf("Scissors\n");
+    else {
+        printf("Invalid choice!\n");
+        return 1;
+    }
 
-    // Print the random number
-    // printf("Random Number: %d\n", randomNumber);
+    printf("Computer chose: ");
+    if (computerChoice == 1) printf("Rock\n");
+    else if (computerChoice == 2) printf("Paper\n");
+    else printf("Scissors\n");
 
-    do
-    {
-        printf("Guess the number");
-        scanf("%d", &guessed_number);
-        if(guessed_number>randomNumber){
-            printf("Lower number please!\n");
-        }
-        else if(guessed_number<randomNumber){
-            printf("Higher number please!\n");
-        }
-        else{
-            printf("Congrats!!\n");
-        }
-        no_of_guesses++;
-
-    } while (guessed_number != randomNumber);
-
-    printf("You guessed the number in %d guesses", no_of_guesses);
+    // Determine winner
+    if (userChoice == computerChoice) {
+        printf("It's a draw!\n");
+    } else if ((userChoice == 1 && computerChoice == 3) ||
+               (userChoice == 2 && computerChoice == 1) ||
+               (userChoice == 3 && computerChoice == 2)) {
+        printf("You win!\n");
+    } else {
+        printf("You lose!\n");
+    }
 
     return 0;
 }
